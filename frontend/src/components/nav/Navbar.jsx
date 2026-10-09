@@ -28,6 +28,7 @@ export default function Navbar() {
     { name: 'Home', path: '/' },
     { name: 'AI Tools', path: '/tools' },
     { name: 'Learn', path: '/learn' },
+    { name: 'Open Source', path: '/open-source' },
     { name: 'Projects', path: '/projects' },
     { name: 'Roadmaps', path: '/roadmaps' },
     { name: 'Community', path: '/community' },
@@ -184,24 +185,24 @@ export default function Navbar() {
                 alignItems: 'center',
                 gap: '8px',
                 background: 'rgba(8, 22, 42, 0.65)',
-                border: '1px solid rgba(0, 242, 254, 0.25)',
-                padding: '8px 14px',
-                borderRadius: '10px',
+                border: '1px solid rgba(157, 78, 221, 0.35)',
+                padding: '7px 14px',
+                borderRadius: '12px',
                 cursor: 'pointer',
                 transition: 'all 0.25s ease',
-                width: '180px',
+                width: '190px',
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = 'rgba(0, 242, 254, 0.6)';
-                e.currentTarget.style.boxShadow = '0 0 15px rgba(0, 242, 254, 0.2)';
+                e.currentTarget.style.borderColor = 'rgba(157, 78, 221, 0.7)';
+                e.currentTarget.style.boxShadow = '0 0 15px rgba(157, 78, 221, 0.25)';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = 'rgba(0, 242, 254, 0.25)';
+                e.currentTarget.style.borderColor = 'rgba(157, 78, 221, 0.35)';
                 e.currentTarget.style.boxShadow = 'none';
               }}
             >
-              <Search size={15} color="#00f2fe" />
-              <span style={{ fontSize: '0.85rem', color: '#64748b' }}>Search anything...</span>
+              <Sparkles size={14} color="#c084fc" />
+              <span style={{ fontSize: '0.84rem', color: '#cbd5e1' }}>Search with Gemini...</span>
             </div>
 
             {/* User State */}

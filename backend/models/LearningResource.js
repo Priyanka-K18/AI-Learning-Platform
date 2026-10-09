@@ -1,5 +1,51 @@
 import mongoose from 'mongoose';
 
+const moduleSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    required: true,
+  },
+  duration: {
+    type: String,
+    default: '30m',
+  },
+  summary: {
+    type: String,
+    default: '',
+  },
+  youtubeUrl: {
+    type: String,
+    default: '',
+  },
+  videoId: {
+    type: String,
+    default: '',
+  },
+  channelTitle: {
+    type: String,
+    default: 'AI Academy',
+  },
+  videoTitle: {
+    type: String,
+    default: '',
+  },
+  objectives: [
+    {
+      type: String,
+    },
+  ],
+  notes: {
+    type: String,
+    default: '',
+  },
+  resources: [
+    {
+      title: String,
+      url: String,
+    },
+  ],
+});
+
 const learningResourceSchema = new mongoose.Schema(
   {
     title: {
@@ -24,13 +70,15 @@ const learningResourceSchema = new mongoose.Schema(
       type: String,
       default: '2 hours',
     },
-    modules: [
-      {
-        title: String,
-        duration: String,
-        summary: String,
-      },
-    ],
+    overviewVideoId: {
+      type: String,
+      default: '',
+    },
+    instructor: {
+      type: String,
+      default: 'Nexus Faculty',
+    },
+    modules: [moduleSchema],
     icon: {
       type: String,
       default: 'BrainCircuit',

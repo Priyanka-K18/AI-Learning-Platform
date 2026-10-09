@@ -11,6 +11,7 @@ import LearnPage from './pages/LearnPage';
 import ProjectsPage from './pages/ProjectsPage';
 import RoadmapsPage from './pages/RoadmapsPage';
 import CommunityPage from './pages/CommunityPage';
+import OpenSourcePage from './pages/OpenSourcePage';
 import AuthPage from './pages/AuthPage';
 
 export default function App() {
@@ -25,6 +26,8 @@ export default function App() {
             <Route path="/tools/:id" element={<ToolDetailPage />} />
             <Route path="/learn" element={<LearnPage />} />
             <Route path="/learn/:id" element={<LearnPage />} />
+            <Route path="/open-source" element={<OpenSourcePage />} />
+            <Route path="/open-source/:id" element={<OpenSourcePage />} />
             <Route path="/projects" element={<ProjectsPage />} />
             <Route path="/projects/:id" element={<ProjectsPage />} />
             <Route path="/roadmaps" element={<RoadmapsPage />} />

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { fetchLearning } from '../../services/api';
-import { BookOpen, Clock, Users, Star, ArrowRight, Layers, Sparkles } from 'lucide-react';
+import { BookOpen, Clock, Users, Star, ArrowRight, Layers, Sparkles, Play } from 'lucide-react';
 
 export default function LearningTracksSection() {
   const [tracks, setTracks] = useState([]);
@@ -182,8 +182,9 @@ export default function LearningTracksSection() {
                   border: '1px solid rgba(255, 255, 255, 0.05)',
                 }}
               >
-                <div style={{ fontSize: '0.75rem', color: '#64748b', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-                  Curriculum Modules:
+                <div style={{ fontSize: '0.75rem', color: '#64748b', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.06em', display: 'flex', justifyContent: 'space-between' }}>
+                  <span>Curriculum Modules:</span>
+                  <span style={{ color: '#00f2fe' }}>YouTube Tutorials</span>
                 </div>
                 {track.modules?.slice(0, 3).map((mod, idx) => (
                   <div
@@ -194,11 +195,36 @@ export default function LearningTracksSection() {
                       justifyContent: 'space-between',
                       fontSize: '0.82rem',
                       color: '#cbd5e1',
-                      padding: '4px 0',
+                      padding: '6px 0',
+                      borderBottom: idx < 2 ? '1px solid rgba(255, 255, 255, 0.04)' : 'none',
                     }}
                   >
-                    <span>• {mod.title}</span>
-                    <span style={{ color: '#64748b', fontSize: '0.75rem' }}>{mod.duration}</span>
+                    <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '65%' }}>
+                      • {mod.title}
+                    </span>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        navigate(`/learn/${track._id}?lesson=${idx}`);
+                      }}
+                      style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '4px',
+                        padding: '3px 8px',
+                        borderRadius: '6px',
+                        background: 'rgba(0, 242, 254, 0.12)',
+                        border: '1px solid rgba(0, 242, 254, 0.25)',
+                        color: '#00f2fe',
+                        fontSize: '0.72rem',
+                        cursor: 'pointer',
+                        fontFamily: 'var(--font-heading)',
+                      }}
+                      title="Watch Tutorial video"
+                    >
+                      <Play size={10} fill="#00f2fe" />
+                      <span>Watch Tutorial</span>
+                    </button>
                   </div>
                 ))}
               </div>

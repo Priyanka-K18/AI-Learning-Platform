@@ -11,6 +11,7 @@ import learningRoutes from './routes/learning.js';
 import projectRoutes from './routes/projects.js';
 import roadmapRoutes from './routes/roadmaps.js';
 import communityRoutes from './routes/community.js';
+import openSourceRoutes from './routes/openSource.js';
 import { seedDatabase } from './seed.js';
 
 dotenv.config();
@@ -37,6 +38,7 @@ app.use('/api/learning', learningRoutes);
 app.use('/api/projects', projectRoutes);
 app.use('/api/roadmaps', roadmapRoutes);
 app.use('/api/community', communityRoutes);
+app.use('/api/open-source', openSourceRoutes);
 
 // Health check
 app.get('/api/health', (req, res) => {

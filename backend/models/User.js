@@ -34,6 +34,21 @@ const userSchema = new mongoose.Schema(
         ref: 'AITool',
       },
     ],
+    completedLessons: [
+      {
+        courseId: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'LearningResource',
+        },
+        moduleIndex: {
+          type: Number,
+        },
+        completedAt: {
+          type: Date,
+          default: Date.now,
+        },
+      },
+    ],
   },
   { timestamps: true }
 );

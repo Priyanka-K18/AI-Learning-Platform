@@ -58,6 +58,21 @@ export const fetchToolById = async (id) => {
   return res.data;
 };
 
+export const fetchToolsStats = async () => {
+  const res = await api.get('/tools/stats');
+  return res.data;
+};
+
+export const fetchRecentlyVerified = async () => {
+  const res = await api.get('/tools/recently-verified');
+  return res.data;
+};
+
+export const reportTool = async (id, data) => {
+  const res = await api.post(`/tools/${id}/report`, data);
+  return res.data;
+};
+
 export const bookmarkTool = async (id) => {
   const res = await api.post(`/tools/${id}/bookmark`);
   return res.data;
@@ -80,6 +95,16 @@ export const searchAI = async (query) => {
   return res.data;
 };
 
+export const searchWithGemini = async (query) => {
+  const res = await api.post('/search/gemini', { query });
+  return res.data;
+};
+
+export const checkGeminiStatus = async () => {
+  const res = await api.get('/search/gemini/status');
+  return res.data;
+};
+
 // Learning APIs
 export const fetchLearning = async (params = {}) => {
   const res = await api.get('/learning', { params });
@@ -88,6 +113,16 @@ export const fetchLearning = async (params = {}) => {
 
 export const fetchLearningById = async (id) => {
   const res = await api.get(`/learning/${id}`);
+  return res.data;
+};
+
+export const fetchCourseProgress = async (id) => {
+  const res = await api.get(`/learning/${id}/progress`);
+  return res.data;
+};
+
+export const toggleCourseModule = async (courseId, moduleIndex) => {
+  const res = await api.post(`/learning/${courseId}/toggle-module`, { moduleIndex });
   return res.data;
 };
 
@@ -126,6 +161,22 @@ export const createCommunityPost = async (postData) => {
 
 export const replyCommunityPost = async (id, content) => {
   const res = await api.post(`/community/${id}/reply`, { content });
+  return res.data;
+};
+
+// Open-Source Learning Hub APIs
+export const fetchOpenSourceRepos = async (params = {}) => {
+  const res = await api.get('/open-source', { params });
+  return res.data;
+};
+
+export const fetchOpenSourceRepoById = async (id) => {
+  const res = await api.get(`/open-source/${id}`);
+  return res.data;
+};
+
+export const fetchOpenSourceStats = async () => {
+  const res = await api.get('/open-source/stats');
   return res.data;
 };
 

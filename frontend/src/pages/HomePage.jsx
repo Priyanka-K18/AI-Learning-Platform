@@ -4,6 +4,7 @@ import AIToolCategories from '../components/categories/AIToolCategories';
 import FeaturedToolsSection from '../components/tools/FeaturedToolsSection';
 import LearningTracksSection from '../components/learning/LearningTracksSection';
 import InteractiveSandboxSection from '../components/sandbox/InteractiveSandboxSection';
+import OpenSourceSpotlightSection from '../components/opensource/OpenSourceSpotlightSection';
 import Footer from '../components/footer/Footer';
 
 export default function HomePage() {
@@ -24,7 +25,10 @@ export default function HomePage() {
       {/* 5. Curated AI Learning Tracks */}
       <LearningTracksSection />
 
-      {/* 6. Footer */}
+      {/* 6. Open-Source Learning Hub Spotlight */}
+      <OpenSourceSpotlightSection />
+
+      {/* 7. Footer */}
       <Footer />
     </div>
   );
