@@ -23,8 +23,11 @@ dotenv.config();
 export const seedDatabase = async (forceReseed = false) => {
   try {
     const existingToolCount = await AITool.countDocuments();
-    if (existingToolCount >= 300 && !forceReseed) {
-      console.log(`Database already has ${existingToolCount} AI tools. Skipping seed.`);
+    const existingCourseCount = await LearningResource.countDocuments();
+    const existingRepoCount = await OpenSourceRepo.countDocuments();
+
+    if (existingToolCount >= 300 && existingCourseCount >= 10 && existingRepoCount >= 20 && !forceReseed) {
+      console.log(`Database already seeded (${existingToolCount} tools, ${existingCourseCount} courses, ${existingRepoCount} repos).`);
       return;
     }
 

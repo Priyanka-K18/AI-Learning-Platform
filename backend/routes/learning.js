@@ -1,4 +1,5 @@
 import express from 'express';
+import mongoose from 'mongoose';
 import LearningResource from '../models/LearningResource.js';
 import User from '../models/User.js';
 import jwt from 'jsonwebtoken';
@@ -37,9 +38,22 @@ router.get('/', async (req, res) => {
   }
 });
 
+// GET /api/learning/tracks
+router.get('/tracks', async (req, res) => {
+  try {
+    const resources = await LearningResource.find().sort({ rating: -1 });
+    return res.json({ tracks: resources, total: resources.length });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+});
+
 // GET /api/learning/:id
 router.get('/:id', async (req, res) => {
   try {
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+      return res.status(404).json({ message: 'Resource not found or invalid ID format' });
+    }
     const resource = await LearningResource.findById(req.params.id);
     if (!resource) {
       return res.status(404).json({ message: 'Learning resource not found' });

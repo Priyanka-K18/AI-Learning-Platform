@@ -78,20 +78,51 @@ app.use((err, req, res, next) => {
   });
 });
 
+let server;
+
+function startServer(mode = 'standard') {
+  if (server) return;
+  server = app.listen(PORT, () => {
+    if (mode === 'fallback') {
+      console.log(`⚠️ AI Nexus Server listening on http://localhost:${PORT} (offline DB fallback mode)`);
+    } else {
+      console.log(`🚀 AI Nexus Backend Server listening on http://localhost:${PORT}`);
+    }
+  });
+
+  server.on('error', (err) => {
+    if (err.code === 'EADDRINUSE') {
+      console.warn(`Port ${PORT} in use, waiting to retry...`);
+      setTimeout(() => {
+        if (server) server.close();
+        server = null;
+        startServer(mode);
+      }, 1000);
+    } else {
+      console.error('Server error:', err);
+    }
+  });
+}
+
 // Connect to MongoDB and start server
 mongoose
   .connect(MONGODB_URI)
   .then(async () => {
     console.log('⚡ Connected to MongoDB (ai_nexus)');
     await seedDatabase();
-    app.listen(PORT, () => {
-      console.log(`🚀 AI Nexus Backend Server listening on http://localhost:${PORT}`);
-    });
+    startServer('standard');
   })
   .catch((err) => {
     console.error('⚠️ MongoDB Connection Error:', err.message);
-    // Still listen so server is accessible even if DB needs retry
-    app.listen(PORT, () => {
-      console.log(`⚠️ AI Nexus Server listening on http://localhost:${PORT} (offline DB fallback mode)`);
-    });
+    startServer('fallback');
   });
+
+process.once('SIGUSR2', () => {
+  if (server) server.close(() => process.kill(process.pid, 'SIGUSR2'));
+});
+process.on('SIGINT', () => {
+  if (server) server.close(() => process.exit(0));
+});
+process.on('SIGTERM', () => {
+  if (server) server.close(() => process.exit(0));
+});
