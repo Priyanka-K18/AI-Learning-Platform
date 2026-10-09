@@ -11,10 +11,15 @@ out/
 
 # Environment files
 .env
-.env.*
+.env.local
+.env.development
+.env.production
+*.env
 backend/.env
 frontend/.env
-*.env
+!.env.example
+!backend/.env.example
+!frontend/.env.example
 
 # Logs
 npm-debug.log*

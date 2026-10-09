@@ -1,0 +1,31 @@
+{
+  "name": "ai-nexus-platform",
+  "version": "1.0.0",
+  "description": "AI Nexus — Unified Full-Stack AI Learning & Discovery Platform",
+  "private": true,
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "scripts": {
+    "dev": "npm run dev:all",
+    "dev:backend": "npm run dev --prefix backend",
+    "dev:frontend": "npm run dev --prefix frontend",
+    "dev:all": "node scripts/dev.mjs",
+    "build": "npm run build --prefix frontend",
+    "install:all": "npm install --prefix backend && npm install --prefix frontend",
+    "seed": "node backend/seed.js"
+  },
+  "keywords": [
+    "ai",
+    "machine-learning",
+    "ai-tools",
+    "learning-platform",
+    "react",
+    "express",
+    "mongodb",
+    "gemini"
+  ],
+  "author": "Priyanka-K18",
+  "license": "ISC"
+}
